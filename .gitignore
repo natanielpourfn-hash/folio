@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+uploads/*
+converted/*
+!uploads/.gitkeep
+!converted/.gitkeep
+*.log
+.DS_Store
+.vite/
