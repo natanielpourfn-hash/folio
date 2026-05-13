@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check } from 'lucide-react'
+import { Check, Loader2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const plans = [
   {
@@ -57,6 +58,18 @@ const fadeUp = {
 
 export default function Pricing() {
   const [yearly, setYearly] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleProCheckout = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.post('/api/stripe/checkout')
+      window.location.href = data.url
+    } catch {
+      alert('Erreur lors de la redirection vers le paiement. Réessaie.')
+      setLoading(false)
+    }
+  }
 
   return (
     <main className="pt-28 pb-24 px-6">
@@ -141,16 +154,23 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <Link
-                  to={plan.ctaTo}
-                  className={`w-full text-center py-2.5 px-4 rounded text-sm font-medium transition-colors block ${
-                    plan.featured
-                      ? 'bg-primary text-white hover:bg-primary/90'
-                      : 'border border-subtle hover:border-black/20 hover:bg-surface'
-                  }`}
-                >
-                  {plan.cta}
-                </Link>
+                {plan.featured ? (
+                  <button
+                    onClick={handleProCheckout}
+                    disabled={loading}
+                    className="w-full text-center py-2.5 px-4 rounded text-sm font-medium transition-colors bg-primary text-white hover:bg-primary/90 disabled:opacity-60 flex items-center justify-center gap-2"
+                  >
+                    {loading && <Loader2 size={13} className="animate-spin" />}
+                    {loading ? 'Redirection...' : plan.cta}
+                  </button>
+                ) : (
+                  <Link
+                    to={plan.ctaTo}
+                    className="w-full text-center py-2.5 px-4 rounded text-sm font-medium transition-colors border border-subtle hover:border-black/20 hover:bg-surface block"
+                  >
+                    {plan.cta}
+                  </Link>
+                )}
               </div>
             </motion.div>
           ))}

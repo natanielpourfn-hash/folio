@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion'
 import Home from './pages/Home'
 import Convert from './pages/Convert'
 import Pricing from './pages/Pricing'
+import Success from './pages/Success'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { ToastProvider } from './components/ui/Toast'
@@ -20,6 +21,7 @@ function AppInner() {
           <Route path="/convert" element={<Convert />} />
           <Route path="/convert/:tool" element={<Convert />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </AnimatePresence>
       {!isConvertPage && <Footer />}

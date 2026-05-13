@@ -7,6 +7,7 @@ const path = require('path')
 const cron = require('node-cron')
 const { cleanupOldFiles } = require('./utils/cleanup')
 const convertRoutes = require('./routes/convert')
+const stripeRoutes = require('./routes/stripe')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -19,6 +20,7 @@ app.use('/uploads', express.static(path.join(__dirname, '../../uploads')))
 app.use('/converted', express.static(path.join(__dirname, '../../converted')))
 
 app.use('/api', convertRoutes)
+app.use('/api/stripe', stripeRoutes)
 
 app.get('/api/health', (_req, res) => res.json({ ok: true }))
 
