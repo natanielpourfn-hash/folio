@@ -19,13 +19,14 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto w-full px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center select-none">
+        <Link to="/" className="flex items-center gap-2.5 select-none">
           <img
             src="/logo.png"
             alt="Folio"
-            className="h-8 w-auto object-contain"
+            className="h-9 w-9 object-contain rounded-lg"
             draggable={false}
           />
+          <span className="font-display text-xl font-semibold tracking-tight text-primary">Folio</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
