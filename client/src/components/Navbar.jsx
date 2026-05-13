@@ -57,10 +57,10 @@ export default function Navbar() {
           <img
             src="/logo.png"
             alt="Folio"
-            className="h-9 w-9 object-contain rounded-lg"
+            className="h-12 w-12 object-contain rounded-xl"
             draggable={false}
           />
-          <span className="font-display text-xl font-semibold tracking-tight text-primary">Folio</span>
+          <span className="font-display text-2xl font-semibold tracking-tight text-primary">Folio</span>
         </Link>
 
         {/* Nav */}
